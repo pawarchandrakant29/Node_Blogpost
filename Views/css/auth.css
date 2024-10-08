@@ -1,0 +1,120 @@
+body {
+	background-color: #f0f0f0;
+	font-family: Arial, sans-serif;
+}
+
+.container {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.signup-box {
+  
+	width: 500px;
+	background-color: #fff;
+	padding: 20px;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	height: auto;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+	margin-top: 0;
+	color: #333;
+}
+
+.input-field {
+	margin-bottom: 20px;
+  position: relative;
+}
+
+.input-field input[type="text"], .input-field input[type="email"], .input-field input[type="tel"], .input-field input[type="password"] {
+	width: 95%;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+  outline: none;
+	border-radius: 5px;
+}
+
+.input-field label {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 10px;
+	font-size: 16px;
+	color: #000000;
+	transition: 0.2s;
+}
+
+.input-field input[type="text"]:focus + label, .input-field input[type="email"]:focus + label, .input-field input[type="tel"]:focus + label, .input-field input[type="password"]:focus + label {
+	color: #333;
+	transform: translateY(-20px);
+}
+
+.input-field input[type="text"]:valid + label, .input-field input[type="email"]:valid + label, .input-field input[type="tel"]:valid + label, .input-field input[type="password"]:valid + label {
+	color: #333;
+	transform: translateY(-20px);
+}
+
+input[type="submit"] {
+	background-color: #4CAF50;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+input[type="submit"]:hover {
+	background-color: #3e8e41;
+}
+
+.already-account {
+	color: #aaa;
+	font-size: 14px;
+	margin-top: 10px;
+	text-align: center;
+}
+
+.already-account a {
+	color: #333;
+	text-decoration: none;
+}
+
+.already-account a:hover {
+	color: #4CAF50;
+}
+
+.extra-buttons {
+	display: flex;
+	justify-content: flex-end;
+	gap : 20px;
+	margin-top: 20px;
+}
+
+.extra-buttons .btn {
+	background-color: #f0f0f0;
+	color: #333;
+	padding: 10px 15px;
+	border-radius: 5px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 14px;
+	border: 1px solid #ccc;
+}
+
+.extra-buttons .btn:hover {
+	background-color: #4CAF50;
+	color: white;
+}
+
+.btn-1{
+	background-color: transparent;
+	outline: none;
+	border: none;
+}

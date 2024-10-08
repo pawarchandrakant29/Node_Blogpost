@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Blog Post</title>
+
+    <!-- Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            color: #ffffff; /* Default text color set to white for dark background */
+        }
+
+        /* Container Styles */
+        .blog-container {
+            background-color: #000000; /* Changed to black */
+            padding: 40px 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1); /* Light shadow for contrast */
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-container h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #ff0000; /* Changed to red for visibility */
+            position: relative;
+        }
+
+        .blog-container h1::after {
+            content: '';
+            width: 50px;
+            height: 3px;
+            background-color: #ff0000; /* Red underline */
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+        /* Form Styles */
+        .input-field {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-field input,
+        .input-field textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #555555; /* Darker border for visibility */
+            border-radius: 8px;
+            transition: border-color 0.3s;
+            font-size: 1rem;
+            color: #ffffff; /* White text for dark background */
+            background-color: #333333; /* Dark background for inputs */
+        }
+
+        .input-field input:focus,
+        .input-field textarea:focus {
+            border-color: #ff0000; /* Red border on focus */
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* Red glow on focus */
+        }
+
+        .input-field label {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background-color: #000000; /* Match container background */
+            padding: 0 5px;
+            font-size: 0.9rem;
+            color: #aaaaaa; /* Light gray for labels */
+        }
+
+        /* Button Styles */
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            background-color: #ff0000; /* Changed to red */
+            color: #ffffff;
+            transition: background-color 0.3s, transform 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #cc0000; /* Darker red on hover */
+            transform: translateY(-2px);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        /* Image Preview Styles */
+        .image-preview {
+            display: none;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2); /* Light shadow for contrast */
+        }
+
+        /* Footer Link */
+        .footer-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.95rem;
+            color: #cccccc; /* Light gray for footer text */
+        }
+
+        .footer-link a {
+            color: #ff0000; /* Red for links */
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .blog-container {
+                padding: 30px 20px;
+            }
+
+            .blog-container h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Blog Form Container -->
+    <div class="blog-container">
+        <h1>Edit Blog</h1>
+        <form id="blogForm" method="post" action="/updateBlogs/<%= editBlog._id %>" enctype="multipart/form-data">
+
+            <!-- Image Upload -->
+            <div class="file-field input-field">
+                <div class="btn red">
+                    <span>Upload Blog Image</span>
+                    <input type="file" name="updateimg" id="image" accept="image/*">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Choose an image">
+                </div>
+            </div>
+
+            <!-- Image Preview -->
+            <div class="image-preview" id="imagePreview">
+                <img src="#" alt="Image Preview" id="previewImg" />
+            </div>
+
+            <!-- Blog Title -->
+            <div class="input-field">
+                <input type="text" name="title" id="title" value="<%= editBlog.title %>" required>
+                <label for="title">Blog Title</label>
+            </div>
+
+            <!-- Blog Content -->
+            <div class="input-field">
+                <textarea name="content" id="content" class="materialize-textarea" rows="6"
+                    required><%= editBlog.content %></textarea>
+                <label for="content">Blog Content</label>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-submit">Update Blog</button>
+
+            <!-- Footer Link -->
+            <div class="footer-link">
+                <a href="/dashboard"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Font Awesome JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Materialize components
+            M.AutoInit();
+
+            // Initialize Materialize Textarea
+            var textNeedCount = document.querySelectorAll('textarea');
+            M.CharacterCounter.init(textNeedCount);
+
+            // Image Preview Functionality
+            const imageInput = document.getElementById('image');
+            const imagePreview = document.getElementById('imagePreview');
+            const previewImg = document.getElementById('previewImg');
+
+            imageInput.addEventListener('change', function () {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        previewImg.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                    }
+
+                    reader.readAsDataURL(file);
+                } else {
+                    previewImg.src = '#';
+                    imagePreview.style.display = 'none';
+                }
+            });
+
+            // Display existing image if editing
+            const existingImage = "<%= editBlog.imagePath %>"; // Adjust based on your backend
+            if (existingImage) {
+                previewImg.src = existingImage;
+                imagePreview.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+
+</html>

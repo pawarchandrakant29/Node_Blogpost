@@ -1,0 +1,69 @@
+body {
+    background-color: #f8f9fa;
+    overflow-y: hidden;
+}
+
+header{
+    border-bottom: 1px solid white
+}
+
+.sidebar {
+    height: 100vh;
+    background-color: #007bff;
+    padding-top: 20px;
+    color: white;
+}
+
+.sidebar .nav-link {
+    color: white;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #0056b3;
+    border-radius: 10px;
+}
+
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-footer .btn-sm {
+    margin-left: 5px;
+}
+
+h1 {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.my_bloglist {
+    width: 100%;
+    height: 80%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/* Adjust the layout for larger screens */
+@media (min-width: 768px) {
+    main {
+        margin-left: 240px;
+    }
+}
+
+
+.profile{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+   }

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Blog</title>
+
+    <!-- Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            background-size: cover;
+            color: #ffffff; /* Default text color set to white for dark background */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        /* Container Styles */
+        .card {
+            background-color: #000000; /* Changed to black */
+            padding: 40px 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1); /* Light shadow for contrast */
+            max-width: 500px; /* Card width */
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            color: #ffffff; /* White text for dark background */
+        }
+
+        .header-title {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .header-title h2 {
+            font-size: 2rem;
+            margin: 0;
+            text-transform: uppercase;
+            color: #ff0000; /* Red color for title */
+        }
+
+
+        /* Close Icon Styles */
+        .close-icon {
+            color: #ffffff;
+            font-size: 1.5rem;
+            text-decoration: none;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            transition: color 0.3s;
+        }
+
+        .close-icon:hover {
+            color: #ff0000; /* Change color on hover */
+        }
+
+        /* Form Styles */
+        .input-field {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-field input,
+        .input-field textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #555555; /* Darker border for visibility */
+            border-radius: 8px;
+            transition: border-color 0.3s;
+            font-size: 1rem;
+            color: #ffffff; /* White text for dark background */
+            background-color: #333333; /* Dark background for inputs */
+        }
+
+        .input-field input:focus,
+        .input-field textarea:focus {
+            border-color: #ff0000; /* Red border on focus */
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* Red glow on focus */
+        }
+
+        .input-field label {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background-color: #000000; /* Match container background */
+            padding: 0 5px;
+            font-size: 0.9rem;
+            color: #aaaaaa; /* Light gray for labels */
+        }
+
+        /* Button Styles */
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            background-color: #ff0000; /* Changed to red */
+            color: #ffffff;
+            transition: background-color 0.3s, transform 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #cc0000; /* Darker red on hover */
+            transform: translateY(-2px);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        /* Image Upload Button */
+        .file-field .btn {
+            background-color: #ff0000; /* Red color for consistency */
+            transition: background-color 0.3s;
+        }
+
+        .file-field .btn:hover {
+            background-color: #cc0000; /* Darker red on hover */
+        }
+
+        /* Image Preview Styles */
+        .img-preview {
+            display: none;
+            max-width: 80%; /* Smaller preview size */
+            height: auto;
+            border-radius: 8px;
+            margin: 15px auto;
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2); /* Light shadow for contrast */
+            display: block; /* Center the image */
+        }
+
+        @media (max-width: 768px) {
+            .header-title h2 {
+                font-size: 1.5rem;
+            }
+
+            .card {
+                margin: 20px;
+                width: 90%; /* Responsive card width */
+                padding: 30px 20px;
+            }
+
+            .close-icon {
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Blog Form Container -->
+    <div class="card">
+        <div class="header-title">
+            <h2>Create New Blog</h2>
+        </div>
+        <a href="/" class="close-icon"><i class="fas fa-times"></i></a>
+        <form method="post" action="/addblog" enctype="multipart/form-data">
+
+            <!-- Image Upload -->
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>Upload Blog Image</span>
+                    <input type="file" name="image" id="imageInput" required accept="image/*" onchange="previewImage()">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Choose an image..." required>
+                </div>
+            </div>
+            <img id="imagePreview" class="img-preview" src="#" alt="Image Preview">
+
+            <!-- Blog Title -->
+            <div class="input-field">
+                <input type="text" name="title" id="title" required>
+                <label for="title">Blog Title</label>
+            </div>
+
+            <!-- Blog Content -->
+            <div class="input-field">
+                <textarea name="content" id="content" class="materialize-textarea" rows="6" required></textarea>
+                <label for="content">Blog Content</label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" class="btn-submit">Submit Blog</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Font Awesome JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Materialize components
+            M.AutoInit();
+
+            // Initialize Materialize Textarea
+            var textNeedCount = document.querySelectorAll('textarea');
+            M.CharacterCounter.init(textNeedCount);
+        });
+
+        // Function to preview image
+        function previewImage() {
+            const input = document.getElementById('imageInput');
+            const preview = document.getElementById('imagePreview');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block'; // Show image preview
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.src = ''; // Clear image preview if no file is selected
+                preview.style.display = 'none'; // Hide image preview
+            }
+        }
+    </script>
+</body>
+
+</html>

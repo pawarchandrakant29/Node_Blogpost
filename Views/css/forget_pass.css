@@ -1,0 +1,25 @@
+.card {
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+	border: none;
+	border-radius: 10px;
+}
+
+.btn-primary {
+	background-color: #4CAF50;
+	border-color: #4CAF50;
+}
+
+.btn-primary:hover {
+	background-color: #45a049;
+	border-color: #45a049;
+}
+.form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.card{
+    width: 500px;
+    height: 400px;
+}
